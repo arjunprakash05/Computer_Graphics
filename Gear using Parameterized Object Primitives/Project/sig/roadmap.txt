@@ -1,0 +1,27 @@
+﻿==================================================================
+          Standalone Interactive Graphics (SIG) Toolkit
+    Copyright (c) 2014-2017 Marcelo Kallmann and contributors
+==================================================================
+
+===== Todo ====
+
+- Add makefiles
+- Review file loading by GsModel and KnSkeleton
+- Review title of example programs
+
+===== Searchable Labels Tracking Work in Progress =====
+
+- CamDev:   global update of camera transformations
+- UiDev:	user interface development
+- SgDev:	scene graph development
+- ManipDev: development to include rotation in SnManipulator
+- TodoNote: functionality not yet implemented
+- ImprNote: possible functionality improvement
+- PerfNote: note concerning performance
+
+===== State of Examples =====
+
+- raytest: ray window not showing model and ray not displaying properly
+- uidemo: centered styles with radio/check buttons not working, add "about" cmd, align "centered button groups"
+- shapes: flat shading not correct, review CamDev notes
+- skelviewer: still very limited in functionality

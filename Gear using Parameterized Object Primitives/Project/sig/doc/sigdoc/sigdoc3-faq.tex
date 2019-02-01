@@ -1,0 +1,28 @@
+%%==========================================================================
+\section{Frequently Asked Questions}
+%%==========================================================================
+
+SIG was developed over several years according to the needs of a number of projects it has supported in different platforms. It provides an integrated framework that is efficient and very flexible. While its design can be seen to not follow some common practices in modern C++ development, once you get used to it you will see how everything makes sense and you will enjoy how simple and efficient the library is.
+
+\subsection{Why not use std classes such as std::ostream and std::vector instead of GsInput, GsOutput and GsArray?}
+
+The main reasons are:
+1) Too much code bloat included. For example, when just the header files of ostream, istream, and vector 
+are included in gs.h the compilation time of SIG more than doubles.
+2) Difficulty to customize these classes to a variety of needs. For example arrays adopting memory from other arrays, input with built-in parsing utilities, redirection to/from generic functions, etc.
+
+For example, in one of our tests SIG compiled in 19s while this time significantly increased when including std files as follows: 
+iosfwd: 23s,
+vector: 32s, and
+iostream: 41s.
+
+\subsection{I really want to use std::vector, which is now a standard class in most projects, why not use it instead of GsArray?}
+
+In addition to avoiding code bloat and its flexibility, GsArray is also very efficient because it is designed favoring speed of operations. 
+GsArray is often faster than std::vector because it is designed to handle low-level primitive objects and it does not call object constructors and destructors during array manipulation.
+
+In most cases we are dealing with arrays of primitive objects and during dynamic reallocation there is no need to spend time calling unnecessary member initializations. This efficiency however requires care when using GsArray with non-primitive classes, study gs\_array.h in order to correctly use the GsArray classes.
+
+Your application can of course use std::vector as its main array class and use GsArray only to interface with SIG classes as needed. GsArray provides a variety of constructors from data, and methods adopt() and abandon() which provide significant flexibility to interface with other classes.
+
+

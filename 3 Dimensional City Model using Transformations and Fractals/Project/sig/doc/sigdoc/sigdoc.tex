@@ -1,0 +1,119 @@
+
+\documentclass[10pt,letterpaper]{article}
+\RequirePackage{calc}
+\addtolength{\voffset}{-1in}
+\addtolength{\hoffset}{-1in}
+\setlength{\topmargin}{2.8cm}
+\setlength{\oddsidemargin}{2.6cm}
+\setlength{\evensidemargin}{2.6cm}
+\setlength{\textwidth}{\paperwidth - 5.2cm}
+\setlength{\textheight}{\paperheight - 5.6cm}
+\setlength{\footskip}{36pt}
+\setlength{\marginparsep}{0.5cm}
+\setlength{\marginparwidth}{1.5cm}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\parskip}{2pt plus 1pt minus 1pt}
+
+%Font option 1:
+\RequirePackage{palatino}
+\renewcommand{\familydefault}{\sfdefault}
+%Font option 2:
+%\usepackage[T1]{fontenc}
+%Font option 3:
+%\usepackage[scaled]{uarial}
+%\renewcommand*\familydefault{\sfdefault} %% Only if base font is to be sans serif
+
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[sort&compress]{natbib}
+
+\usepackage{graphicx}
+%\usepackage{parskip} %% for zero \parindent and non-zero \parskip, intelligently.
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb} %% R
+\usepackage{algorithm}
+%\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{multicol}
+\usepackage{float}
+%%\usepackage{mathptmx}
+%\usepackage{epsfig}
+%\usepackage{amsbsy}    % boldsymbol
+%\usepackage{cite}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\usepackage{listings}
+
+\newcommand{\pcenter}[1]  { \begin{center} {#1} \end{center} }
+\newcommand{\ptitle}[1]   { \begin{center} \noindent{\Large \bf {#1}} \end{center} }
+\newcommand{\ptitleb}[1]  { \begin{center} \noindent{ \bf {#1}} \end{center} }
+\newcommand{\pbold}[1]    { \noindent{\bf {#1}} }
+\newcommand{\pnewpage}[1] { \newpage \pagenumbering{arabic} \renewcommand{\thepage}  
+                               {{#1}\arabic{page}} }
+
+\newcommand{\bfnew}[1]    { \mathbf{#1} }
+
+\newcommand{\bv}[1]{\mathbf{#1}}   %bold face vector (can use \boldsymbol, mathbf{})
+\newcommand{\dv}[1]{\dot{\boldsymbol{#1}}}          %dot vector shortcut
+\newcommand{\uv}[1]{\hat{\boldsymbol{#1}}}          %unit vector shortcut
+\newcommand{\nv}[1]{\left\|\boldsymbol{#1}\right\|} %norm of vector
+\newcommand{\nm}[1]{\left\|#1\right\|}              %norm
+
+\newcommand{\code}[1]{{\ttfamily{#1}}}
+
+\begin{document}
+
+%%==============================================================
+%% C++ Listing definitions
+%%==============================================================
+\lstdefinestyle{cppcustomstyle}{
+  xleftmargin=\parindent,
+  language=C++,
+  basicstyle=\footnotesize\ttfamily\bfseries,
+  stringstyle=\color[rgb]{0.6,0,0},
+	morestring=[b]<,
+  commentstyle=\color[rgb]{0,0.4,0},
+  identifierstyle=\color{black},
+  numberstyle=\color{blue},
+  keywordstyle=\color{blue},
+}
+\lstset{escapechar=@,style=cppcustomstyle}
+
+%Example:
+%\begin{lstlisting}[caption={test one}]
+%...
+%\end{lstlisting}
+
+%%==============================================================
+%% Text
+%%==============================================================
+
+\input{sigdoc1-intro} \clearpage 
+\input{sigdoc2-mainclasses} \clearpage 
+\input{sigdoc3-faq} \clearpage 
+\input{sigdoc4-tutorials} \clearpage 
+
+\bibliography{sigdoc-references} \bibliographystyle{abbrvnat}
+
+\appendix \pnewpage{A--}
+\input{sigdocA} \clearpage 
+\input{sigdocA1-filedesc-m} \clearpage 
+\input{sigdocA2-filedesc-s} \clearpage 
+\input{sigdocA3-filedesc-sd} \clearpage 
+\input{sigdocA4-filedesc-sp} \clearpage 
+\input{sigdocA5-filedesc-sm} \clearpage 
+
+\end{document}
+
+% Options for \bibliographystyle:
+% unsrt: Same as plain except entries appear in order of citation
+% alpha: Same as plain except labels are formed letters and year
+% abbrv: Same as plain except names, months, etc are abbreviated.
+% astron: include names in labels, needs \documentstyle[astron]{article}, has \cite*{}

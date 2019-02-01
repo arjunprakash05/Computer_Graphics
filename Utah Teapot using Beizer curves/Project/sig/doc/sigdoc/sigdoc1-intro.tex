@@ -1,0 +1,98 @@
+
+%%==========================================================================
+\ptitle{SIG Toolkit Documentation}
+%%==========================================================================
+
+
+Standalone Interactive Graphics (SIG) Toolkit
+
+   Copyright (c) 2014-2017 Marcelo Kallmann. All Rights Reserved.
+   This software is distributed under the standard three-clause BSD license.
+   All copies must contain the full copyright notice licence.txt located
+   at the base folder of the distribution. 
+
+
+\section{Introduction}
+
+SIG is a class toolkit for the development of interactive 3D graphics applications. SIG is designed to be small, flexible, fast, portable, and standalone. It is fully written in C++ but with moderate use of C++ most recent features. It is truly standalone, it contains its own functions to create windows, load OpenGL functions and GLSL shaders, and it also contains a basic graphical user interface (GUI) which operates directly on OpenGL. SIG does not not use STL classes. While today STL is mature and can be used in your projects, all SIG data structures are defined in SIG, making it highly portable, guaranteeing the same behavior in any platform, significantly faster to compile, and often faster in execution time.
+
+Previous versions of SIG have had different names and have been used for over a decade to support a number of different research projects from supporting the development of motion planning algorithms~\cite{kallmann05aiide,kallmann04sab} to simulating autonomous virtual characters and controlling NASA's Robonaut.
+
+The main features are a small, simple and extendible scene graph, a flexible skeleton structure supporting a variety of joint definitions, classes for loading bvh motion capture files and including a number of blending operations between motions, postures, and skeletons, utilities for motion planners, and an analytical inverse kinematics solver~\cite{kallmann08cavw}. It includes a viewer for 2D or 3D scenes, including a basic but useful set of GUI elements. It also has basic functionality to manage resources such as textures and fonts. It is completely standalone.
+
+SIG has several limitations. It is not a game engine and its rendering capabilities are still basic. It can however be used as the starting point of your own game engine. It was designed over the years to support the development of several research projects, it has been mostly designed to be flexible for a number of possible different uses. 
+
+See the readme.txt file available in the base folder of the distribution for a description of the package and compilation notes.
+
+
+\subsection{Code Structure}
+SIG is divided in 3 libraries: sig, sigogl, and sigkin. Libraries are divided in modules and in each library, header files, source files and class names start with 2 letters indicating in which module the filename or class belongs to. An overview of the modules is available below:
+
+\begin{itemize}
+    \item sig module ``gs'': generic graphics and system classes, for example: \code{GsVec}, GsMat, GsOuput, GsArray
+    \item sig module ``sn'': scene graph nodes, for example: SnModel, SnLines, SnTransform
+    \item sig module ``sa'': scene actions, for example: SaBBox, SaRenderMode
+    \item sig module ``cd'': collision detection interface to external collision detectors, available as external distributions,
+    \item sigogl module ``gl'': classes for interfacing with OpenGL 4, for example: GlProgram, GlTexture
+    \item sigogl module ``glr'': OpenGL renderers for the shape nodes of the SIG scene graph
+    \item sigogl module ``ui'': GUI classes, for example: UiButton, UiStyle, UiManager
+    \item sigogl module ``ws'': window system classes, for example: WsWindow, WsViewer
+    \item sigkin module ``kn'': kinematics module, currently the only module of sigkin, for example: KnSkeleton, KnJoint, KnPosture, KnMotion
+\end{itemize}
+
+\subsection{A First SIG Application}
+
+Starting a SIG application is as simple as declaring a viewer and a scene, and then running the event manager with ws\_run(). See example in Listing~\ref{lst:firstapp}.
+
+\begin{lstlisting}[caption={My first SIG application.}\label{lst:firstapp}]
+# include <sig/sn_primitive.h>
+# include <sigogl/ws_viewer.h>
+# include <sigogl/ws_run.h>
+
+int main ( int argc, char** argv )
+{
+    WsViewer* v = new WsViewer ( -1, -1, 640, 480, "My First SIG APP" );
+
+    SnPrimitive* p = new SnPrimitive ( GsPrimitive::Capsule, 5.0f, 5.0f, 9.0f );
+    p->prim().nfaces = 100;
+    p->prim().material.diffuse = GsColor::darkred;
+    v->rootg()->add ( p );
+    v->cmd ( WsViewer::VCmdAxis );
+    v->cmd ( WsViewer::VCmdStatistics );
+    v->view_all ();
+    v->show ();
+
+    ws_run ();
+    return 1;
+}
+\end{lstlisting}
+
+The output of the program above is shown in Figure X.
+
+In most cases however the user will derive WsViewer with its own viewer class in order to catch GUI events and extend additional functionality by overriding virtual methods. Multiple example applications are provided in the SIG package.
+
+Multiple examples are available in the main distribution. For example:
+\begin{itemize}
+\item modelviewer: example application to view and inspect models, supporting .obj files.
+\item skelviewer: example application to view skeletons and motions, supporting .bvh motion files.
+\item etc.
+\end{itemize}
+
+The best way to start is to study these applications and see how the classes are used to perform the multiple tasks.
+
+The project sigapp is available as a typical empty SIG application structure for starting new projects.
+[Put here instructions on how to copy a sigapp project for customization and reuse]
+
+\subsection{File Formats}
+
+A number of SIG classes have their own file formats for saving and loading data. A listing of the SIG data files is provided below.
+
+\begin{itemize}
+    \item GsModel file format .m
+    \item KnSkeleton file format .s
+    \item KnSkeleton data file format .sd
+    \item KnPosture file format .sp
+    \item KnMotion file format .sm 
+\end{itemize}
+
+A complete description of each file format is available in the Appendix of this document.

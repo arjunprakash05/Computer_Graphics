@@ -1,0 +1,13 @@
+%%==========================================================================
+\section{Overview of Main Classes}
+%%==========================================================================
+
+\code{Gs} classes provide several classes which support the basic functionality of SIG applications. 
+
+One of the most used classes is \code{GsArray}.
+
+\code{GsArray} is an important class built to manipulate arrays very efficiently. The class works similarly to \code{std::vector} class of the standard template library. However it has a main difference: it manipulates the internal data of the array as non-typed memory blocks, so the elements of the array are not treated as objects and the constructors and destructors of the elements in the array are never called when the array is manipulated. \code{GsArray} relies on low-level C functions for memory allocation, re-allocation, and deletion. Therefore \code{GsArray} is an efficient memory management class which outperforms \code{std::vector} in several operations. 
+
+The user needs however to pay attention to only use it for primitive types, or for pointers to objects with the use of \code{GsArrayPt}. See \code{gs\_array.h} for details.
+
+\code{GsArray} automatically double its internal memory when it needs more space in certain operations. So references to objects in the array will only be guaranteed to be valid while no mew elements are added to the array. For example, a command sequence like \code{int\& e=array[0]; array.push()=5;} should never be written because when 5 is pushed into the array memory re-allocation may happen, invalidating the reference to element 0.

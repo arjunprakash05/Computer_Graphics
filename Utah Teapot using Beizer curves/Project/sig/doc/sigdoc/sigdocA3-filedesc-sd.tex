@@ -1,0 +1,31 @@
+\subsection{KnSkeleton .sd Skeleton Data Definition File}
+
+\begin{lstlisting}[title={}]
+
+# The file extension adopted for this file is .sd
+# Character '#' is used for comments
+
+KnSkeleton     # Signature. It should be the first keyword of the file
+                             
+skeldata       # This keyword must come right after the signature
+               # for defining that this is not a new skeleton but 
+               # modifications to the current one.
+               
+               # At this point, any skeleton command understood by
+               # a .s file can be given here and will overwrite 
+               # previous definitions.
+
+joint <name>   # For joint (re)definitions, first specify the joint name,
+{ (JOINTDEFS)  # then any joint definition commands can be used.
+}
+
+joint <name>   # Any number of joints can be modified
+{ (JOINTDEFS)  
+}
+
+...
+
+[ end ]        # Optional end keywork forces end of parsing
+
+\end{lstlisting}
+

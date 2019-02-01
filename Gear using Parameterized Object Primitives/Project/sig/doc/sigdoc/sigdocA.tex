@@ -1,0 +1,31 @@
+
+%\section
+\section{Description of SIG Data Files}
+
+The following simple notation is used to specify the format of text data files used in SIG.
+
+\begin{itemize}
+	\item Single letters, such as \emph{i} or \emph{x} denote that a number is expected. The chosen letters should help identify the meaning of the numbers, for example, \emph{i} denotes integers while \emph{x} a real number coordinate. Indices may be used in the following way: \emph{i1}, \emph{i2}, and double letters such as \emph{nm} meaning ``number of materials'' may also be used.
+  
+  \item Keywords are any names that are not single or double-letter strings.
+
+  \item Parameters are any names appearing between {\ttfamily < >}, indicating that a name or number is expected as a parameter.
+  
+  \item Optional commands will appear inside brackets, such that the entire section inside the brackets is optional. For example, command {\ttfamily [name <name>]} indicates that specifying a name is optional.
+
+  \item Delimiter ``{\ttfamily|}'' separates a list of keywords or numbers where only one element of the list is to be chosen as a parameter.
+
+\end{itemize}
+
+This simple description is enough to describe the used data files, which are specified in the next sections.
+
+%=====================
+
+\captionsetup{labelformat=empty,labelsep=none}
+%nolol=true 
+
+\lstset{language=} %,style=fileformatstyle}
+
+
+
+

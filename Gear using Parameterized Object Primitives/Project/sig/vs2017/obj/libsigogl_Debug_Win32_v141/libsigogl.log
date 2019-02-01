@@ -1,0 +1,43 @@
+﻿  glr_text.cpp
+  glr_points.cpp
+  glr_planar_objects.cpp
+  glr_lines.cpp
+  glr_model.cpp
+  glr_base.cpp
+  gl_context.cpp
+  gl_font.cpp
+  gl_objects.cpp
+  gl_program.cpp
+  gl_renderer.cpp
+  gl_resources.cpp
+  gl_shader.cpp
+  gl_texture.cpp
+  gl_tools.cpp
+  ui_button.cpp
+  ui_panel.cpp
+  ui_style.cpp
+  wsint_mswin.cpp
+  wsint_opengl.cpp
+  Generating Code...
+  Compiling...
+  wsint_x11.cpp
+  ws_dialog.cpp
+  ws_run.cpp
+  ws_viewer.cpp
+  ws_window.cpp
+  glr_lines2.cpp
+  Generating Code...
+  ui_check_button.cpp
+  ui_color_chooser.cpp
+  ui_dialogs.cpp
+  ui_element.cpp
+  ui_file_chooser.cpp
+  ui_input.cpp
+  ui_label.cpp
+  ui_manager.cpp
+  ui_output.cpp
+  ui_radio_button.cpp
+  ui_slider.cpp
+  Generating Code...
+  libsigogl.vcxproj -> D:\ComputerGraphics\sig\vs2017\\obj\libsigogl_Debug_Win32_v141\libsigogl32mdd.lib
+          1 file(s) copied.

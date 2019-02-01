@@ -1,0 +1,124 @@
+\subsection{KnSkeleton .s Skeleton Definition File}
+
+\begin{lstlisting}[title={}]
+KnSkeleton                   # Signature. It should be the first keyword of the file.
+
+[ path|add_path <path> ]     # Loaded geometry files will be searched in the 
+                             # same directory of the .s file, or also searched
+                             # in the directories specified with the path command.
+                             # Several paths can be defined to be searched.
+
+[ name|set_name <skelname> ] # Specifies the name of the skeleton
+
+
+[ scale <scale factor> ]     # Command scale is used to scale the length of the
+                             # skeleton links (offsets), for example for converting
+                             # units. Translational limits are also scaled.
+
+[ globalgeo <true|false> ]   # If true, the geometry is considered to be loaded in
+                             # global coordinates and therefore all geometries are
+                             # converted to local coordinates after loaded.
+                             # By default globalgeo is considered false.
+
+<SKELETON_DEFINITION>        # Usually the skeleton definition comes here. The 
+                             # definition syntax is specified later on in this file.
+
+[ posture <name val1 val2 ... valN> ] # Command posture specifies a posture which
+                             # values must match the active channels of the
+                             # skeleton. All loaded postures will share the
+                             # same channels. This command must come after the 
+                             # skeleton definition.
+
+[ dist_func_joints <joint1 joint2 ... jointN;>] # This command specifies which 
+                             # joints are used in the distance function between
+                             # postures. This command must come after all posture
+                             # definitions.
+
+[ collision_free_pairs  <jointname1 jointname2 ...>; ] # List of joint pairs to
+                             # to be deactivated for collision detection.
+
+[ userdata <var1=val; var2=val1 val2; ... varN=val;> ] # This command allows the
+                             # specification of any kind of user-related data.
+                             # The data is loaded as a GsVars object that is
+                             # maintained by the skeleton
+
+[ ik <LeftArm|RightArm|LeftLeg|RightLeg> <jointname> ] # initialize IK with given
+                                                       # joint as end effector
+
+[ end ]                      # Optional keywork that forces end of parsing
+
+
+#### SKELETON_DEFINITION ####
+# A skeleton can be defined in two ways: hierarchical or flat.
+# The syntax of a hierarchical skeleton definition is:
+
+skeleton                     # tells this is a hierarchical definition
+root <name>                  # specifies the root joint and its name
+{ <JOINTDEFS>                # joint definitions go here
+  joint <name>               # specifies child joint and name
+   { <JOINTDEFS>             # etc
+     joint <name>
+      { ...
+      }
+   }
+  ...
+}
+
+# The syntax of a flat non-hierarchical skeleton definition is:
+
+root <name>                  # first specify the root joint
+{ <JOINTDEFS>
+}
+joint <name> : <parent name> # then specify each joint with its name and its
+{ <JOINTDEFS>                # parent's name, which must be previously defined
+}
+...                          # etc
+
+# It is possible to modify the settings of a previously defined joint with
+# the following syntax (the syntax of a .sd file):
+joint <name>
+{ (JOINTDEFS)
+}
+
+#### JOINTDEFS ####
+# The possible joint definitions are listed below.
+# Rotations specified in "axis <x y z> ang <a>" can also be written as "x y z a",
+# where a is an angle in degrees.
+
+  [offset|center <x y z> ]
+
+  [euler XYZ|YXZ|YZX|ZY]
+
+  [channel XPos|YPos|ZPos|XRot|YRot|ZRot <val> [free | <min><max> | lim <min><max>] ]
+
+  [channel Quat [axis <x> <y> <z> ang <degrees>] [frozen] ]
+
+  [channel Swing [axis <x> <y> ang <degrees>] [lim <xradius> <yradius>] ]
+
+  [channel Twist <val> [free | <min><max> | lim <min><max>] ]
+
+  [modelmat <4x4matrix as 16 floats>]          # apply to the joint model
+
+  [modelrot <axis <x> <y> <z> ang <degrees>>]  # apply to the joint model
+
+  [prerot <axis <x> <y> <z> ang <degrees>>]    # joint pre rotation
+
+  [postrot <axis <x> <y> <z> ang <degrees>>]   # joint post rotation
+
+  [align <pre|post|prepost|preinv> <x y z>]    # set pre/post for aligning given vector
+
+  [visgeo <model filename>] # models are "added" if more than one visgeo is declared
+
+  [colgeo <model filename>] # models are "added" if more than one colgeo is declared
+
+  [visgeo|colgeo primitive <defs>] # see Note 2 below
+  
+  [visgeo|colgeo shared]    # reuse the other col/visgeo previously defined in the joint
+
+
+#### Advanced Notes ####
+- Note1: Quaternion rotations can now be also loaded with format: xzy <x> <y> <z>
+- Note2: Geometries can now also be created with [visgeo|colgeo primitive <defs>;],
+         where <defs> are the commands in the primitive description of the .m format
+
+\end{lstlisting}

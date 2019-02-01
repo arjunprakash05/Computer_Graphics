@@ -1,0 +1,7 @@
+==================================================================
+          Standalone Interactive Graphics (SIG) Toolkit
+    Copyright (c) 2014-2017 Marcelo Kallmann and contributors
+==================================================================
+
+This software includes public domain files stb_image.h and stb_image_write.h
+by Sean Barrett and the contributors listed in those files.

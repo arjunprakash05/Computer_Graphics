@@ -1,0 +1,65 @@
+\subsection{GsModel .m Model Definition File}
+
+{\footnotesize  (Status: needs revision with respect to the new GSModel internal format including grouped information.}
+
+\begin{lstlisting}[title={}]
+GsModel           # signature to identify the file
+
+[name <name> ]    # if not given, name becomes an empty string
+
+[culling <0|1>]   # if not defined, back-face culling is on by default
+
+vertices <nv>     # list of vertices is mandatory, nv is the number of vertices
+<x> <y> <z>
+...
+  
+faces <nf>        # list of triangular faces is mandatory
+<a> <b> <c>       # a triangle is defined with indices to the vertex list, starting from 0
+...
+
+[normals <nm>     # optional list of normals per vertex
+<x> <y> <z>
+...]
+
+[fnormals <nf>    # optional list of normals per face
+<a> <b> <c> 
+...]
+
+[materials <nm>   # list of materials, each material is read by GsMaterial input operator
+amb <r> <g> <b> <a> dif <r> <g> <b> <a> spe <r> <g> <b> <a> emi <r> <g> <b> <a> shi <v> [tid <i>]
+...]
+
+[fmaterials <mf>  # indices of materials to be assigned per face
+<i1>
+<i2>
+...]
+
+[mtlnames         # optional names for each material index
+i name1
+i name2
+...]
+
+[textcoords <nt>  # texture coordinates defined per vertex
+<u> <v>
+...]
+
+[textures <nt>
+<image.png>       # image file for each texture to be used
+...]
+
+[ftextcoords <nf> # texture coordinates as indices per face
+<a> <b> <c>
+...
+<a> <b> <c>]
+
+[primitive        # if the model represents a primitive, the primitive parameters go here
+ <box|sphere|cylinder|capsule> <ra> [rb] [rc] <nfaces> #(nfaces needed even for a box)
+ [center <x y z>]
+ [orientation axis <x y z> ang <deg>]
+ [material amb <r> <g> <b> <a> dif <r> <g> <b> <a> spe <r> <g> <b> <a> emi <r> <g> <b> <a> shi <v>]
+ [color <r> <g> <b> <a>] # color will set the diffuse color of the default material
+ [smooth|flat]
+ ;
+]
+
+\end{lstlisting}

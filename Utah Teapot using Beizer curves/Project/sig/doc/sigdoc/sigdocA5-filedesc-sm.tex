@@ -1,0 +1,28 @@
+\subsection{KnMotion .sm Motion Definition File}
+
+\begin{lstlisting}[title={}]
+
+#
+# .sm skeleton motion file Description
+#
+
+KnMotion                       # signature
+
+[ name <namestring> ]          # specifies a name for the motion (optional but recommended)
+
+channels <N>                   # channels are defined in the same way as for posture definitions
+<ch1jname> <ch1type>           # see .sp file documentation for a detailed description
+<ch2jname> <ch2type>
+...
+<chNjname> <chNtype>
+
+[ startkt|start_kt <keytime> ] # optional command to adjust keytimes to start with given value
+
+[ frames <numframes> ]         # optionally gives how many frames are in this motion
+                               # if not specified, will parse until the end of the file
+
+kt <keytime> fr <POSTVALUES>   # frame data, where POSTVALUES is written according to the .sp format,
+kt <keytime> fr <POSTVALUES>   # which follows the channels description
+...
+
+\end{lstlisting}

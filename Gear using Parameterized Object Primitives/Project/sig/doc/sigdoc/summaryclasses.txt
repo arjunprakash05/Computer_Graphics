@@ -1,0 +1,42 @@
+
+=== Primitive Classes ===   
+- no internal mem alloc, can be initialized without constr/destr/copy op
+
+GsBox, GsCamera, GsVec, GsVec2, GsQuat, GsColor, GsEvent, GsLight, GsLoc, GsQuat
+GsMat, GsMaterial, GsLine, GsPlane, GsPrimitive, GsRandom, GsTime, GsTimer
+GsTrackball, GsVal
+GsShared
+
+=== Generic Classes ===   
+- manage mem, need copy operator, copy constr etc.
+
+ GsString, GsVar, GsVars, GsMatn
+ *GsInput, *GsOutput
+ *GsPolygon (derives GsArray), GsString (derives GsArray)
+ (do not act as a container)
+
+=== Fast Containers ===
+- contr/destr/copy operator of user data are not called
+- have to be used with primitive classes or with pointers
+ GsArray, GsBuffer, GsQueue, GsDeque, GsHeap, GsGrid
+*all need PointerVersion: GsTablePtr<X> and ref version: GsTableRef<X>
+
+=== Pointer Containers ===
+- Gs classes ending with Pt
+- handle new/delete mem alloc, protected inheritance from FastContainer
+
+GsArrayPt: needs to use private or protected inheritance
+GsTable: allow user-defined hash function
+*GsSet (based on user pointers)
+
+=== Managed Container ===
+- no copy constructor (no return by function)
+- uses another class to manage user data allocation, copy, etc
+ GsGraph, GsList, 
+ *GsManager, GsManagerBase are shared
+
+=== Referencing Container ===
+- container for shareable elements, which derive from GsShareable
+- will use object pointers and methods ref/unref 
+- Example: GsArrayRef 
+

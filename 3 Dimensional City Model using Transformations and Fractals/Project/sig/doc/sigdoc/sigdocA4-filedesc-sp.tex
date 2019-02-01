@@ -1,0 +1,31 @@
+\subsection{KnPosture .sp Posture Definition File}
+
+\begin{lstlisting}[title={}]
+
+# The file extension adopted for this file is .sp
+# Character '#' is used for comments
+# A Posture file has no signature
+
+[name <name>]      # Give the Posture a name. Even if the keyword name is
+                   # omitted the parser will load a string given here as the name.
+
+channels [<N>]     # Specification of channels start. Parameter N is the number of channels,
+                   # then each channel is defined with a joint name and channel type
+
+<ch1jname> <XPos|YPos|ZPos|XRot|YRot|ZRot|Quat|Swing|Twist>
+<ch2jname> <XPos|YPos|ZPos|XRot|YRot|ZRot|Quat|Swing|Twist>
+...
+<chNjname> <XPos|YPos|ZPos|XRot|YRot|ZRot|Quat|Swing|Twist>
+
+[;]                # The number of channels N may be omitted, and only in that case, 
+                   # a ';' must be written at the end of the channel list definition
+
+val1 val2 ... valK # the joint values of the Posture must match the channel description:
+                   # - channels of types Xpos, YPos, ZPos, XRot, YRot, ZRot require one value each,
+                   # - channel Quat is described by 3 values, which are the axis-angle description
+                   #    of the quaternion rotation,
+                   # - channel Swing requires 2 values, the 2D axis-angle of the swing rotation,
+                   # - channel Twist requires 1 angle value.
+                   # - All angles are to be specified in degrees.
+
+\end{lstlisting}
